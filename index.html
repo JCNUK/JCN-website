@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JCN UK | Welcome to JCN</title>
+    <style>
+        :root {
+            --accent-blue: #00d2ff;
+            --accent-yellow: #ffcb05;
+            --bg-dark: #121214;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(at 20% 20%, rgba(0, 210, 255, 0.05) 0px, transparent 50%),
+                radial-gradient(at 80% 80%, rgba(255, 203, 5, 0.03) 0px, transparent 50%);
+            color: #ffffff;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .wrapper {
+            width: 100%;
+            max-width: 1000px;
+            text-align: center;
+        }
+
+        header {
+            margin-bottom: 3.5rem;
+        }
+
+        header h1 {
+            font-size: 4rem;
+            margin: 0 0 10px 0;
+            letter-spacing: 2px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff, #a1a1aa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: #a1a1aa;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .gateway-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 50px 40px;
+            text-decoration: none;
+            color: #ffffff;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Hover animations for the 3D Printing side */
+        .gateway-card.printing:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-blue);
+            box-shadow: 0 15px 35px rgba(0, 210, 255, 0.15);
+        }
+
+        /* Hover animations for the Collectibles side */
+        .gateway-card.collectibles:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-yellow);
+            box-shadow: 0 15px 35px rgba(255, 203, 5, 0.1);
+        }
+
+        .gateway-card h2 {
+            font-size: 2.2rem;
+            margin: 0 0 15px 0;
+            font-weight: 700;
+        }
+
+        .printing h2 { color: var(--accent-blue); }
+        .collectibles h2 { color: var(--accent-yellow); }
+
+        .gateway-card p {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #d4d4d8;
+            margin: 0 0 30px 0;
+        }
+
+        .action-txt {
+            font-weight: bold;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: auto;
+        }
+
+        .printing .action-txt { color: var(--accent-blue); }
+        .collectibles .action-txt { color: var(--accent-yellow); }
+
+        .gateway-card .arrow {
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .gateway-card:hover .arrow {
+            transform: translateX(5px);
+        }
+
+        footer {
+            margin-top: 5rem;
+            font-size: 0.9rem;
+            color: #71717a;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <header>
+            <h1>JCN UK</h1>
+            <p>Father & Son Ran Business</p>
+        </header>
+
+        <div class="grid">
+            <!-- 3D PRINTING SPLIT -->
+            <a href="https://3d.jcn-uk.com" class="gateway-card printing">
+                <div>
+                    <h2>3D Printing</h2>
+                    <p>Official Hive Authorized Seller. Specialising in brilliant multi-coloured fidget toys, custom creations, and high-quality FDM/Resin prints.</p>
+                </div>
+                <div class="action-txt">
+                    Explore Printing Services <span class="arrow">&rarr;</span>
+                </div>
+            </a>
+            
+            <!-- COLLECTIBLES SPLIT -->
+            <a href="https://collectibles.jcn-uk.com" class="gateway-card collectibles">
+                <div>
+                    <h2>Collectibles</h2>
+                    <p>Your destination for Pokémon TCG cards, sealed booster packs, boxes, and pristine graded gem packs. Sourced in all languages from budget items to rare singles.</p>
+                </div>
+                <div class="action-txt">
+                    Browse Card Collectibles <span class="arrow">&rarr;</span>
+                </div>
+            </a>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 JCN UK. Meet us in person at our next live UK trade event!</p>
+        </footer>
+    </div>
+
+</body>
+</html>
