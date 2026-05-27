@@ -3,179 +3,354 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JCN UK | Welcome to JCN</title>
+    <title>JCN Printing | Fidgets & Tech</title>
     <style>
+        /* Modern Variables with Default Light Mode */
         :root {
-            --accent-blue: #00d2ff;
-            --accent-yellow: #ffcb05;
-            --bg-dark: #121214;
-            --card-bg: rgba(255, 255, 255, 0.03);
-            --card-border: rgba(255, 255, 255, 0.08);
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --accent: #2ecc71;
+            --dark: #1e293b;
+            --bg: #fdfeff;
+            --card-bg: #ffffff;
+            --text-main: #111827;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --tag-bg: #f1f5f9;
+            --navbar-bg: rgba(255, 255, 255, 0.8);
+            --notice-bg: linear-gradient(to right, #e0e7ff, #e0e7ff);
         }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-dark);
-            background-image: 
-                radial-gradient(at 20% 20%, rgba(0, 210, 255, 0.05) 0px, transparent 50%),
-                radial-gradient(at 80% 80%, rgba(255, 203, 5, 0.03) 0px, transparent 50%);
-            color: #ffffff;
-            margin: 0;
+        /* Dark Mode Override variables */
+        [data-theme="dark"] {
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --tag-bg: #334155;
+            --navbar-bg: rgba(15, 23, 42, 0.8);
+            --notice-bg: linear-gradient(to right, #1e1b4b, #1e1b4b);
+        }
+
+        body { 
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+            margin: 0; 
+            background: var(--bg); 
+            color: var(--text-main); 
+            line-height: 1.6;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        /* Fun Gradient Header */
+        header { 
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            color: white; 
+            padding: 40px 20px; 
+            text-align: center; 
+            clip-path: ellipse(150% 100% at 50% 0%);
+            position: relative;
+        }
+
+        header h1 { margin: 0; font-size: 2.5rem; letter-spacing: -1px; }
+
+        /* Modern Floating Theme Toggle Button */
+        .theme-toggle-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            padding: 8px 14px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
             display: flex;
             align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 20px;
-            box-sizing: border-box;
+            gap: 6px;
+            transition: 0.2s ease;
+        }
+        .theme-toggle-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.03);
         }
 
-        .wrapper {
-            width: 100%;
-            max-width: 1000px;
+        /* Navigation */
+        .nav-bar { 
+            background: var(--navbar-bg);
+            backdrop-filter: blur(10px);
+            padding: 15px 30px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: background 0.3s ease;
+        }
+
+        .nav-bar a { color: var(--text-main); text-decoration: none; font-weight: 600; font-size: 0.9rem; }
+        .printer-link { 
+            background: var(--primary); 
+            color: white !important; 
+            padding: 8px 18px; 
+            border-radius: 50px; 
+            transition: 0.3s; 
+        }
+        .printer-link:hover { transform: scale(1.05); box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4); }
+
+        .container { max-width: 1100px; margin: auto; padding: 40px 20px; }
+
+        /* Tags Section */
+        .machine-list { display: flex; gap: 12px; justify-content: center; margin-bottom: 25px; flex-wrap: wrap; }
+        .machine-tag { 
+            background: var(--tag-bg); 
+            color: var(--text-main);
+            padding: 6px 20px; 
+            border-radius: 20px; 
+            font-size: 0.85rem; 
+            font-weight: 600; 
+            border: 1px solid var(--border-color);
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        /* Live Events Tracker (Bento Style) */
+        .events-banner { 
+            background: var(--card-bg); 
+            padding: 30px; 
+            border-radius: 24px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02); 
+            margin-bottom: 50px; 
+            border: 1px solid var(--border-color);
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+        .event-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-top: 20px; }
+        .event-card { 
+            background: var(--tag-bg); 
+            padding: 20px; 
+            border-radius: 16px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            transition: 0.2s ease;
+        }
+        .event-card:hover { transform: scale(1.01); }
+        .event-date { 
+            background: var(--primary); 
+            color: white; 
+            padding: 6px 14px; 
+            border-radius: 10px; 
+            font-weight: bold; 
+            font-size: 0.85rem;
             text-align: center;
+            min-width: 90px;
         }
 
-        header {
-            margin-bottom: 3.5rem;
+        /* Responsive Product Grid */
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+            gap: 25px; 
         }
 
-        header h1 {
-            font-size: 4rem;
-            margin: 0 0 10px 0;
-            letter-spacing: 2px;
-            font-weight: 800;
-            background: linear-gradient(135deg, #ffffff, #a1a1aa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        header p {
-            font-size: 1.2rem;
-            color: #a1a1aa;
-            margin: 0;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-        }
-
-        .gateway-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--card-border);
-            border-radius: 24px;
-            padding: 50px 40px;
-            text-decoration: none;
-            color: #ffffff;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        /* Modern Product Card */
+        .product-card { 
+            background: var(--card-bg); 
+            padding: 25px; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.02); 
+            text-align: center; 
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s ease, border-color 0.3s ease; 
+            border: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            position: relative;
-            overflow: hidden;
         }
+        .product-card:hover { transform: translateY(-8px); box-shadow: 0 20px 35px rgba(0,0,0,0.05); }
 
-        /* Hover animations for the 3D Printing side */
-        .gateway-card.printing:hover {
-            transform: translateY(-8px);
-            border-color: var(--accent-blue);
-            box-shadow: 0 15px 35px rgba(0, 210, 255, 0.15);
-        }
-
-        /* Hover animations for the Collectibles side */
-        .gateway-card.collectibles:hover {
-            transform: translateY(-8px);
-            border-color: var(--accent-yellow);
-            box-shadow: 0 15px 35px rgba(255, 203, 5, 0.1);
-        }
-
-        .gateway-card h2 {
-            font-size: 2.2rem;
-            margin: 0 0 15px 0;
+        .product-card h3 { margin-top: 10px; margin-bottom: 5px; font-size: 1.4rem; color: var(--text-main); }
+        
+        .badge {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 50px;
+            background: var(--tag-bg);
+            color: var(--text-main);
             font-weight: 700;
+            display: inline-block;
+            align-self: center;
+        }
+        .multi-color-badge { background: #fae8ff; color: #a855f7; border: 1px solid #f0abfc; }
+        /* Keep multi-color visibility vibrant in dark mode too */
+        [data-theme="dark"] .multi-color-badge { background: #4a148c; color: #f3e5f5; border: 1px solid #7b1fa2; }
+
+        .price-notice {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-style: italic;
+            margin: 15px 0;
+            display: block;
         }
 
-        .printing h2 { color: var(--accent-blue); }
-        .collectibles h2 { color: var(--accent-yellow); }
-
-        .gateway-card p {
-            font-size: 1.05rem;
-            line-height: 1.6;
-            color: #d4d4d8;
-            margin: 0 0 30px 0;
-        }
-
-        .action-txt {
-            font-weight: bold;
+        .btn { 
+            background: var(--accent); 
+            color: white; 
+            border: none; 
+            width: 100%;
+            padding: 12px; 
+            border-radius: 12px; 
+            cursor: pointer; 
+            font-weight: bold; 
             font-size: 1rem;
-            letter-spacing: 0.5px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+            transition: 0.2s;
             margin-top: auto;
         }
+        .btn:hover { filter: brightness(1.1); }
 
-        .printing .action-txt { color: var(--accent-blue); }
-        .collectibles .action-txt { color: var(--accent-yellow); }
-
-        .gateway-card .arrow {
-            margin-left: 8px;
-            transition: transform 0.3s ease;
+        /* Notice Box */
+        .notice-box { 
+            background: var(--notice-bg); 
+            border: 2px dashed var(--primary); 
+            padding: 25px; 
+            border-radius: 20px; 
+            text-align: center; 
+            margin-top: 50px; 
+            font-weight: 600; 
+            transition: background 0.3s ease;
         }
 
-        .gateway-card:hover .arrow {
-            transform: translateX(5px);
-        }
-
-        footer {
-            margin-top: 5rem;
-            font-size: 0.9rem;
-            color: #71717a;
+        @media (max-width: 600px) {
+            .event-card { flex-direction: column; text-align: center; gap: 15px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="wrapper">
-        <header>
-            <h1>JCN UK</h1>
-            <p>Father & Son Ran Business</p>
-        </header>
+    <header>
+        <!-- Theme Toggle Button -->
+        <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle dark mode">
+            <span>🌙</span> Dark Mode
+        </button>
+        <h1>JCN 3D Printing</h1>
+        <p>Speedy & High-Quality Fidgets, Gear, and Custom Tech</p>
+    </header>
 
-        <div class="grid">
-            <!-- 3D PRINTING SPLIT -->
-            <a href="https://3d.jcn-uk.com" class="gateway-card printing">
-                <div>
-                    <h2>3D Printing</h2>
-                    <p>Official Hive Authorized Seller. Specialising in brilliant multi-coloured fidget toys, custom creations, and high-quality FDM prints.</p>
-                </div>
-                <div class="action-txt">
-                    Explore Printing Services <span class="arrow">&rarr;</span>
-                </div>
-            </a>
-            
-            <!-- COLLECTIBLES SPLIT -->
-            <a href="https://collectables.jcn-uk.com" class="gateway-card collectibles">
-                <div>
-                    <h2>Collectibles</h2>
-                    <p>Your destination for Pokémon TCG cards, sealed booster packs, boxes, and pristine graded gem packs. Sourced in all languages from budget items to rare singles.</p>
-                </div>
-                <div class="action-txt">
-                    Browse Card Collectibles <span class="arrow">&rarr;</span>
-                </div>
-            </a>
-        </div>
-
-        <footer>
-            <p>&copy; 2026 JCN UK. Meet us in person at our next live UK trade event!</p>
-            <p>Made With Love By <a href="https://github.com/zeryth2504">Me ❤️</a></p>
-        </footer>
+    <div class="nav-bar">
+        <a href="https://jcn-uk.com">&larr; Back to JCN Main</a>
+        <a href="./printers/" class="printer-link">Our Fleet &rarr;</a>
     </div>
 
+    <div class="container">
+        
+        <!-- DYNAMIC EVENTS TRACKER -->
+        <div class="events-banner">
+            <h2>📍 Find Us & Browse Our Prints In Person!</h2>
+            <p>Our printing prices vary depending on the event, venue, and customized sizing options. Catch us at our upcoming locations to check out our physical stock or talk commissions!</p>
+            <div class="event-grid" id="eventGrid">
+                <!-- JS will inject events here -->
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-bottom: 20px;">
+            <p><strong>Official Hive Authorized Seller</strong></p>
+            <div class="machine-list">
+                <span class="machine-tag">🚀 Flashforge AD5X</span>
+                <span class="machine-tag">🌈 Multi-Color Capacity</span>
+                <span class="machine-tag">🛠️ Custom Commissions</span>
+            </div>
+        </div>
+
+        <!-- PRODUCT SHOWCASE -->
+        <div class="grid" id="productGrid">
+            <!-- JavaScript will fill this in -->
+        </div>
+
+        <div class="notice-box">
+            📦 Want us to print a specific file or custom design for an upcoming event? <br>
+            <a href="mailto:info@jcn-uk.com" style="color: var(--primary); text-decoration: underline;">Drop us an email</a> and we will prepare it for you!
+        </div>
+    </div>
+
+    <script>
+        // --- THEME CONFIGURATION ---
+        const themeToggle = document.getElementById('themeToggle');
+        const currentTheme = localStorage.getItem('theme');
+
+        // Apply saved theme state immediately
+        if (currentTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            themeToggle.innerHTML = '<span>☀️</span> Light Mode';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            let theme = document.documentElement.getAttribute('data-theme');
+            if (theme === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+                themeToggle.innerHTML = '<span>🌙</span> Dark Mode';
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                themeToggle.innerHTML = '<span>☀️</span> Light Mode';
+            }
+        });
+
+        // --- EASY TO EDIT EVENTS ---
+        const events = [
+            { name: "Kent Card Vault", location: "Brompton Academy, Gillingham", date: "29th Aug 2025" },
+            { name: "Greenfield’s Boot Fair", location: "Anthony's Way, Wainscott", date: "Most Sundays" }
+        ];
+
+        // --- EASY TO EDIT PRODUCTS ---
+        const products = [
+            { name: "Infinity Cube", type: "Fidget", isMulti: true },
+            { name: "Articulated Dragon", type: "Decor", isMulti: true },
+            { name: "Mechanical Switch Keychain", type: "Tech", isMulti: false },
+            { name: "Low-Poly Planter", type: "Home", isMulti: false }
+        ];
+
+        // --- RENDER LOGIC ---
+        const eventGrid = document.getElementById('eventGrid');
+        eventGrid.innerHTML = events.map(e => `
+            <div class="event-card">
+                <div>
+                    <strong style="font-size: 1.1rem; display: block;">${e.name}</strong>
+                    <span style="color: var(--text-muted); font-size: 0.9rem;">${e.location}</span>
+                </div>
+                <div class="event-date">${e.date}</div>
+            </div>
+        `).join('');
+
+        const grid = document.getElementById('productGrid');
+        function renderProducts() {
+            if (products.length === 0) {
+                grid.innerHTML = "<p>Coming soon! Check back later.</p>";
+                return;
+            }
+
+            grid.innerHTML = products.map(p => `
+                <div class="product-card">
+                    <div>
+                        <span class="badge ${p.isMulti ? 'multi-color-badge' : ''}">
+                            ${p.isMulti ? '🌈 Multi-Color' : '✨ Single Color'}
+                        </span>
+                        <h3>${p.name}</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0;">Category: ${p.type}</p>
+                    </div>
+                    <div>
+                        <span class="price-notice">Pricing varies by event & size</span>
+                        <button class="btn" onclick="alert('Contact us to secure this item at our next show!')">See Availability</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        renderProducts();
+    </script>
 </body>
 </html>
